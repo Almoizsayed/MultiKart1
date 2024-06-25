@@ -65,7 +65,7 @@ const EditUser = () => {
         </div>
       </div>
       <div className="flex border mx-5 w-full mt-7 px-4 py-6 rounded">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 w-full">
           <div className="flex flex-col">
             <label htmlFor="firstName">
               First Name <span className="text-red-500">*</span>

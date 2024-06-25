@@ -1,8 +1,7 @@
 import React from "react";
 import UserCard from "./UserCard";
 import useUserStore from "./useUserStore";
-const UserGridView = () => {
-  const users = useUserStore((state) => state.users);
+const UserGridView = ({ users }) => {
   return (
     <div className="flex justify-start items-center flex-wrap gap-4 p-5 md:p-8 ">
       {users.map((user) => (

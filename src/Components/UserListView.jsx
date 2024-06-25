@@ -5,11 +5,10 @@ import { useNavigate } from "react-router-dom";
 import DeleteUser from "./DeleteUser";
 import { toast } from "react-toastify";
 
-const UserListView = () => {
+const UserListView = ({ users }) => {
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
-  const users = useUserStore((state) => state.users) || [];
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   const getLastLoginDisplay = (lastLogin) => {
@@ -28,6 +27,7 @@ const UserListView = () => {
       setShowDeleteModal(true);
     }
   };
+
   const handleSelectUser = (id) => {
     setSelectedUsers((prevSelected) =>
       prevSelected.includes(id)
@@ -43,6 +43,7 @@ const UserListView = () => {
       toast.error("User has been deleted successfully");
     }
   };
+
   const handleSelectAll = (e) => {
     if (e.target.checked) {
       setSelectedUsers(users.map((user) => user.id));
@@ -84,7 +85,12 @@ const UserListView = () => {
           {users.map((user) => (
             <tr key={user.id}>
               <td className="text-[14px] px-4 py-2">
-                <input type="checkbox" className="w-4 h-4" />
+                <input
+                  type="checkbox"
+                  className="w-4 h-4"
+                  onChange={() => handleSelectUser(user.id)}
+                  checked={selectedUsers.includes(user.id)}
+                />
               </td>
               <td className="text-[14px] px-4 py-2">{user.id}</td>
               <td className="text-[14px] px-4 py-2">

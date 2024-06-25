@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import useUserStore from "./useUserStore";
+import { useNavigate } from "react-router-dom";
+import { OptionsIcon } from "../assets/icons";
+import DeleteUser from "./DeleteUser";
 
 export default function UserCard({ user }) {
+  const navigate = useNavigate();
+  const [dropdownopen, setDropdownOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const navigateToEditUser = () => {
+    navigate(`/edit-user/${user.id}`);
+  };
+  const handleDeleteUser = () => {
+    setShowModal(true);
+    useUserStore.getState().deleteUser(user.id);
+    setShowModal(false);
+    toast.error("User has been deleted successfully!");
+    navigate("/");
+  };
+
   return (
-    <div className="relative flex items-center border border-black p-2 rounded-md bg-[#FAFAFA] min-w-[300px] max-w-[336px] ">
+    <div className="relative flex items-center border border-[#777A81] p-2 rounded-md bg-[#FAFAFA] min-w-[300px] max-w-[336px] ">
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-20">
+          <DeleteUser
+            onConfirm={handleDeleteUser}
+            onCancel={() => setShowModal(false)}
+          />
+        </div>
+      )}
       <div className="photo-container pr-4">
         <img
           src={user.photo}
@@ -44,16 +69,34 @@ export default function UserCard({ user }) {
         </div>
       </div>
       <div className="ml-auto mb-auto relative">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="rgb(100,28,192)"
-          className="bi bi-three-dots-vertical"
-          viewBox="0 0 16 16"
+        <button
+          onClick={() => setDropdownOpen(!dropdownopen)}
+          className="focus:outline-none"
         >
-          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-        </svg>
+          <OptionsIcon />
+        </button>
+        {dropdownopen && (
+          <div className="absolute right-0 mt-2 w-40 py-2 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+            <button
+              onClick={() => {
+                navigateToEditUser();
+                setDropdownOpen(false);
+              }}
+              className="block px-4 py-2 text-gray-700 text-left hover:bg-gray-100 w-full"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                setShowModal(true);
+                setDropdownOpen(false);
+              }}
+              className="block px-4 py-2 text-gray-700 text-left hover:bg-gray-100 w-full"
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
