@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserStore from "./useUserStore";
 import { toast } from "react-toastify";
-import { HomeIcon } from "../assets";
+import { HomeIcon } from "../assets/icons/HomeIcon";
 
 const EditUser = () => {
   const users = useUserStore((state) => state.users);

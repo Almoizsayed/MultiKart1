@@ -1,9 +1,11 @@
 import React from "react";
-import { LinesIcon } from "../assets";
+import { LinesIcon } from "../assets/icons/LinesIcon";
 const NavBar = () => {
   return (
-    <div className="ml-6  mt-9">
-      <LinesIcon />
+    <div className="h-14 bg-[#ffffff] shadow-md">
+      <div className="flex items-center h-full">
+        <LinesIcon className={"ml-8"} />
+      </div>
     </div>
   );
 };

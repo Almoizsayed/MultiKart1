@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useUserStore from "./useUserStore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { HomeIcon } from "../assets";
+import { HomeIcon } from "../assets/icons/HomeIcon";
 
 const AddUser = () => {
   const [firstName, setFirstName] = useState("");

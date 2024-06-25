@@ -15,10 +15,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="flex">
+        <div className="font-poppins">
           <Sidebar />
-          <div className="w-full h-18 flex  flex-col">
+          <div className="hidden md:block md:ml-64">
             <NavBar />
+          </div>
+          <div className="md:ml-64">
             <ToastContainer />
             <Routes>
               <Route path="/" element={<UserList />} />
