@@ -6,12 +6,16 @@ import {
   ListViewIcon,
   SearchIcon,
   SortByIcon,
+  LeftArrowIcon,
 } from "../assets/icons";
+
+import { RightArrowIcon } from "../assets/icons/RightArrowIcon";
 import UserGridView from "./UserGridView";
 import UserListView from "./UserListView";
 import { useNavigate } from "react-router-dom";
 import { Router } from "react-router-dom";
 import useUserStore from "./useUserStore";
+import Pagination from "./Pagination";
 
 const UserList = () => {
   const [isGridView, setIsGridview] = useState(true);
@@ -19,6 +23,8 @@ const UserList = () => {
   const [isInputFocused, setIsInputFocused] = useState("false");
   const [isSearchExpanded, setIsSearchExpanded] = useState("false");
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const users = useUserStore((state) => state.users);
   // useEffect(() => {
   //   console.log("Search Query:", searchQuery);
@@ -41,6 +47,11 @@ const UserList = () => {
       ),
     [searchQuery, users]
   );
+  const totalRecords = users.length;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
   const navigateToAddUser = () => {
     navigate("/add-user");
@@ -145,11 +156,37 @@ const UserList = () => {
         </div>
         <div className="flex">
           {isGridView ? (
-            <UserGridView users={filteredUsers} />
+            <UserGridView users={paginatedUsers} />
           ) : (
-            <UserListView users={filteredUsers} />
+            <UserListView users={paginatedUsers} />
           )}
         </div>
+        {/* <div className="m-2 flex text-[#63666b]">
+          <div className="text-sm font:normal md:text-base"> */}
+        {/* <span> Records will be displayed </span>
+            <input
+              type="number"
+              className="w-7 border-b-2 border-[#e5e5e5] md:w-14"
+            />
+          </div>
+          <div className="text-sm font-normal md:text-base">
+            Records will be displayed like 1-10
+          </div> */}
+        {/* <div className="flex">
+            <RightArrowIcon />
+            <LeftArrowIcon />
+          </div>
+        </div> */}
+        <Pagination
+          currentPage={currentPage}
+          totalRecords={totalRecords}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={setItemsPerPage}
+          LeftArrowIcon={LeftArrowIcon}
+          RightArrowIcon={RightArrowIcon}
+        />
       </div>
     </div>
   );
