@@ -19,8 +19,10 @@ export default function UserCard({ user }) {
     navigate("/");
   };
 
+  // relative flex flex-wrap items-center border border-[#777A81] p-2 rounded-md bg-[#FAFAFA] min-w-[300px] max-w-[336px] "
+
   return (
-    <div className="relative flex items-center border border-[#777A81] p-2 rounded-md bg-[#FAFAFA] min-w-[300px] max-w-[336px] ">
+    <div className=" relative flex w-full max-w-[370px] items-center rounded-md border border-[#E0E0E2] bg-[#FAFAFA] p-4">
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-20">
           <DeleteUser

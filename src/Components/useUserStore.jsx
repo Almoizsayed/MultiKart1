@@ -32,7 +32,7 @@ const useUserStore = create((set) => ({
       email: "olivia.garcia@example.com",
       phone: "567-890-1234",
       lastLogin: "2024-06-03",
-      role: "Moderator",
+      role: "Admin",
       status: "Active",
     },
     {
@@ -76,7 +76,7 @@ const useUserStore = create((set) => ({
       email: "sophia.perez@example.com",
       phone: "901-234-5678",
       lastLogin: "2024-06-07",
-      role: "Moderator",
+      role: "Admin",
       status: "Active",
     },
     {
@@ -120,7 +120,7 @@ const useUserStore = create((set) => ({
       email: "ava.lewis@example.com",
       phone: "345-678-9012",
       lastLogin: "2024-06-11",
-      role: "Moderator",
+      role: "Admin",
       status: "Inactive",
     },
     {

@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { Router } from "react-router-dom";
 import useUserStore from "./useUserStore";
 import Pagination from "./Pagination";
+import SortByMenu from "./SortByMenu";
+import sortUser from "../utils/userFunctions";
 
 const UserList = () => {
   const [isGridView, setIsGridview] = useState(true);
@@ -25,6 +27,7 @@ const UserList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [sortOption, setSortOption] = useState("");
   const users = useUserStore((state) => state.users);
   // useEffect(() => {
   //   console.log("Search Query:", searchQuery);
@@ -56,6 +59,12 @@ const UserList = () => {
   const navigateToAddUser = () => {
     navigate("/add-user");
   };
+  const handleSortOptionChange = useCallback((option) => {
+    setSortOption(option);
+  }, []);
+  const sortedUser = useMemo(() => {
+    return sortUser({ filteredUsers, sortOption });
+  }, [filteredUsers, sortOption]);
 
   return (
     <div className="bg-white">
@@ -96,13 +105,17 @@ const UserList = () => {
         <div className="flex flex-col justify-between mt-4 md:mt-8 rounded-lg  mx-2 md:mx-9">
           <div className="flex justify-between m-4 gap-4  w-full ">
             <div className="flex space-x-3">
-              <button
+              <SortByMenu
+                sortOption={sortOption}
+                setSortOption={handleSortOptionChange}
+              />
+              {/* <button
                 type="button"
                 className="flex p-2 border h-10 border-[#777a81] rounded-md items-center  "
               >
                 <SortByIcon className=" md:mr-2 " />
                 <p className=" text-[#63666B] hidden lg:inline"> Sort by </p>
-              </button>
+              </button> */}
               <button
                 type="button"
                 className="flex p-2 h-10 border border-[#777a81] rounded-md items-center"

@@ -3,15 +3,16 @@ import React from "react";
 export const NextIcon = ({ className }) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      // xmlns="http://www.w3.org/2000/svg"
+      // xmlns:xlink="http://www.w3.org/1999/xlink"
       fill="#000000"
       height="12px"
       width="12px"
       version="1.1"
       id="XMLID_287_"
       viewBox="0 0 24 24"
-      xml:space="preserve"
+      // xml:space="preserve"
+      xmlSpace="preserve"
       className={className}
     >
       <g id="next">
