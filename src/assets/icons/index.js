@@ -13,3 +13,4 @@ export * from "./NextIcon";
 export * from "./LeftArrowIcon";
 export * from "./RightTickIcon";
 export * from "./SortByIcon";
+export * from "./RightArrowIcon";

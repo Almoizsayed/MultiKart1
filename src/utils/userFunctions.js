@@ -1,25 +1,30 @@
-const sortUser = ({ filteredUsers, sortOption }) => {
+export const sortUser = ({ users, sortOption }) => {
+  // console.log(users, sortOption, `sortOption1111111111`);
+  if (sortOption == null) return users;
+
   switch (sortOption) {
     case "A to Z":
-      filteredUsers.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      users.sort((a, b) => a.firstName.localeCompare(b.firstName));
       break;
     case "Z to A":
-      filteredUsers.sort((a, b) => b.firstName.localeCompare(a.firstName));
+      users.sort((a, b) => b.firstName.localeCompare(a.firstName));
       break;
     case "Created Date":
-      filteredUsers.sort(
-        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-      );
+      users.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
       break;
     case "Last Updated":
-      filteredUsers.sort(
-        (a, b) => new Date(b.lastLogin) - new Date(a.lastLogin)
-      );
+      users.sort((a, b) => new Date(b.lastLogin) - new Date(a.lastLogin));
       break;
     default:
       break;
   }
-  return filteredUsers;
+  return users;
 };
 
-export default sortUser;
+export const filterByRole = ({ users, filterOption }) => {
+  // console.log(users, filterOption, `filterOption22222`);
+  if (filterOption == null) return users;
+  return users.filter(
+    (user) => user.role === filterOption || filterOption === "All"
+  );
+};
