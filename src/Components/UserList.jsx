@@ -24,7 +24,7 @@ const UserList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [sortOption, setSortOption] = useState("");
+  const [sortOption, setSortOption] = useState("Created Date");
   const [filterOption, setFilterOption] = useState("");
   const users = useUserStore((state) => state.users);
 
@@ -155,9 +155,9 @@ const UserList = () => {
         </div>
         <div className="flex">
           {isGridView ? (
-            <UserGridView users={users} />
+            <UserGridView users={paginatedUsers} />
           ) : (
-            <UserListView users={users} />
+            <UserListView users={paginatedUsers} />
           )}
         </div>
         <Pagination

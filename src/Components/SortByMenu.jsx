@@ -6,18 +6,21 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
-import { RightTickIcon, SortByIcon } from "../assets/icons";
+import { SortByIcon } from "../assets/icons/SortByIcon";
+import { RightTickIcon } from "../assets/icons";
 
 const SortByMenu = ({ sortOption, setSortOption }) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
-  // for default sort option
   useEffect(() => {
-    if (!sortOption) {
+    const storedSortOption = localStorage.getItem("sortOption");
+    if (storedSortOption) {
+      setSortOption(storedSortOption);
+    } else {
       setSortOption("Created Date");
     }
-  }, [sortOption, setSortOption]);
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -27,7 +30,6 @@ const SortByMenu = ({ sortOption, setSortOption }) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -43,6 +45,7 @@ const SortByMenu = ({ sortOption, setSortOption }) => {
   const handleMenuItemClick = (option) => {
     setSortOption(option);
     setOpen(false);
+    localStorage.setItem("sortOption", option);
   };
 
   const isSelected = (option) => option === sortOption;
@@ -52,7 +55,6 @@ const SortByMenu = ({ sortOption, setSortOption }) => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
@@ -69,7 +71,7 @@ const SortByMenu = ({ sortOption, setSortOption }) => {
           className="flex rounded-md border border-[#777a81] p-2"
         >
           <SortByIcon className="my-1 md:mr-1" />
-          <span className="hidden md:inline">Sort By</span>
+          <span className="hidden lg:inline">Sort By</span>
         </button>
         <Popper
           open={open}
