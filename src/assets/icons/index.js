@@ -14,3 +14,6 @@ export * from "./LeftArrowIcon";
 export * from "./RightTickIcon";
 export * from "./SortByIcon";
 export * from "./RightArrowIcon";
+export * from "./ActiveUsersIcon";
+export * from "./InactiveUsersIcon";
+export * from "./TotalUsersIcon";

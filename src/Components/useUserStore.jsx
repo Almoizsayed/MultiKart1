@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const useUserStore = create((set) => ({
+const useUserStore = create((set, get) => ({
   users: [
     {
       id: 1,
@@ -9,7 +9,7 @@ const useUserStore = create((set) => ({
       lastName: "Wilson",
       email: "mia.wilson@example.com",
       phone: "345-678-9012",
-      lastLogin: "2024-06-01",
+      lastLogin: "2023-07-01",
       role: "User",
       status: "Active",
     },
@@ -31,7 +31,7 @@ const useUserStore = create((set) => ({
       lastName: "Garcia",
       email: "olivia.garcia@example.com",
       phone: "567-890-1234",
-      lastLogin: "2024-06-03",
+      lastLogin: "2024-05-03",
       role: "Admin",
       status: "Active",
     },
@@ -42,7 +42,7 @@ const useUserStore = create((set) => ({
       lastName: "Rodriguez",
       email: "liam.rodriguez@example.com",
       phone: "678-901-2345",
-      lastLogin: "2024-06-04",
+      lastLogin: "2023-10-04",
       role: "User",
       status: "Inactive",
     },
@@ -53,7 +53,7 @@ const useUserStore = create((set) => ({
       lastName: "Hernandez",
       email: "emma.hernandez@example.com",
       phone: "789-012-3456",
-      lastLogin: "2024-06-05",
+      lastLogin: "2023-09-05",
       role: "Admin",
       status: "Active",
     },
@@ -75,7 +75,7 @@ const useUserStore = create((set) => ({
       lastName: "Perez",
       email: "sophia.perez@example.com",
       phone: "901-234-5678",
-      lastLogin: "2024-06-07",
+      lastLogin: "2024-01-07",
       role: "Admin",
       status: "Active",
     },
@@ -86,7 +86,7 @@ const useUserStore = create((set) => ({
       lastName: "Sanchez",
       email: "elijah.sanchez@example.com",
       phone: "012-345-6789",
-      lastLogin: "2024-06-08",
+      lastLogin: "2024-02-08",
       role: "User",
       status: "Active",
     },
@@ -97,7 +97,7 @@ const useUserStore = create((set) => ({
       lastName: "Clark",
       email: "isabella.clark@example.com",
       phone: "123-456-7890",
-      lastLogin: "2024-06-09",
+      lastLogin: "2024-03-09",
       role: "Admin",
       status: "Inactive",
     },
@@ -108,7 +108,7 @@ const useUserStore = create((set) => ({
       lastName: "Ramirez",
       email: "ethan.ramirez@example.com",
       phone: "234-567-8901",
-      lastLogin: "2024-06-10",
+      lastLogin: "2024-04-10",
       role: "User",
       status: "Active",
     },
@@ -119,7 +119,7 @@ const useUserStore = create((set) => ({
       lastName: "Lewis",
       email: "ava.lewis@example.com",
       phone: "345-678-9012",
-      lastLogin: "2024-06-11",
+      lastLogin: "2023-09-11",
       role: "Admin",
       status: "Inactive",
     },
@@ -130,7 +130,7 @@ const useUserStore = create((set) => ({
       lastName: "Walker",
       email: "james.walker@example.com",
       phone: "456-789-0123",
-      lastLogin: "2024-06-12",
+      lastLogin: "2023-11-12",
       role: "User",
       status: "Active",
     },
@@ -162,6 +162,21 @@ const useUserStore = create((set) => ({
     set((state) => ({
       users: state.users.filter((user) => user.id !== userId),
     })),
+  getActiveUsersByMonth: () => {
+    const users = get().users;
+    const activeUsersByMonth = {};
+
+    users.forEach((user) => {
+      if (user.status === "Active") {
+        const month = new Date(user.lastLogin).getMonth();
+        if (!activeUsersByMonth[month]) {
+          activeUsersByMonth[month] = 0;
+        }
+        activeUsersByMonth[month]++;
+      }
+    });
+    return activeUsersByMonth;
+  },
 }));
 
 export default useUserStore;

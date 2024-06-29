@@ -7,6 +7,7 @@ import AddUser from "./Components/AddUser";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import EditUser from "./Components/EditUser";
+import Dashboard from "./Components/Dashboard";
 
 // import UserWidget from "./Components/UserWidget";
 // import Functionality from "./Components/Functionality";
@@ -23,7 +24,9 @@ function App() {
           <div className="md:ml-64">
             <ToastContainer />
             <Routes>
-              <Route path="/" element={<UserList />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/users" element={<UserList />} />
               <Route path="/add-user" element={<AddUser />} />
               <Route path="/edit-user/:userId" element={<EditUser />} />
             </Routes>

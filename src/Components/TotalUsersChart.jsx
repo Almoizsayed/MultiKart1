@@ -1,3 +1,4 @@
+// src/components/TotalUsersChart.jsx
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import useUserStore from "./useUserStore";
@@ -21,18 +22,15 @@ ChartJS.register(
 );
 
 const TotalUsersChart = () => {
-  const getActiveUserByMonth = useUserStore(
-    (state) => state.getActiveUserByMonth
+  const getActiveUsersByMonth = useUserStore(
+    (state) => state.getActiveUsersByMonth
   );
-  const activeUserByMonth = getActiveUserByMonth();
+  const activeUsersByMonth = getActiveUsersByMonth();
+
   const months = [
     "January",
     "February",
     "March",
-    "April",
-    "May",
-    "June",
-    "July",
     "April",
     "May",
     "June",
@@ -43,30 +41,33 @@ const TotalUsersChart = () => {
     "November",
     "December",
   ];
+
   const data = {
     labels: months,
-    dataset: [
+    datasets: [
       {
-        labels: ActiveUsers,
-        data: months.map((_, index) => getActiveUserByMonth[index] || 0),
+        label: "Active Users",
+        data: months.map((_, index) => activeUsersByMonth[index] || 0),
         backgroundColor: "#641cc0",
         borderColor: "#641cc0",
         borderWidth: 1,
       },
     ],
   };
+
   const options = {
     responsive: true,
     plugins: {
-      label: {
-        position: "Top",
+      legend: {
+        position: "top",
       },
-      Title: {
+      title: {
         display: true,
         text: "Total Active Users",
       },
     },
   };
+
   return <Bar data={data} options={options} />;
 };
 
