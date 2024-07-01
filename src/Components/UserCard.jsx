@@ -17,6 +17,7 @@ export default function UserCard({ user }) {
     setShowModal(false);
     toast.error("User has been deleted successfully!");
     navigate("/");
+    navigate("/users");
   };
 
   // relative flex flex-wrap items-center border border-[#777A81] p-2 rounded-md bg-[#FAFAFA] min-w-[300px] max-w-[336px] "

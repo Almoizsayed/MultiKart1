@@ -40,6 +40,7 @@ const UserListView = ({ users }) => {
     if (userToDelete) {
       useUserStore.getState().deleteUser(userToDelete);
       setShowDeleteModal(false);
+      navigate("/users");
       toast.error("User has been deleted successfully");
     }
   };

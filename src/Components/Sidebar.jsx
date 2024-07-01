@@ -4,10 +4,12 @@ import img from "../assets/images/multikart_logo.png";
 import { DashboardIcon, LinesIcon, UsersIcon } from "../assets/icons";
 import { useLocation, Link } from "react-router-dom";
 import classNames from "classnames";
+import MobileView from "./MobileView";
 
 const Sidebar = () => {
   const location = useLocation(); // Hook to get current location
   const [openMobileMenu, setOpenMobileMenu] = useState(false); // Example state for mobile menu
+  const [anchorEl, setAnchorEl] = useState(null);
   const activeColor = "#641cc0";
   const defaultColor = "#63666B";
 
@@ -23,9 +25,11 @@ const Sidebar = () => {
     );
   };
 
-  const handleMobileMenuToggle = () => {
+  const handleMobileMenu = (event) => {
     setOpenMobileMenu(!openMobileMenu);
+    setAnchorEl(event.currentTarget);
     // Additional logic for mobile menu toggle
+    console.log("Menu Clicked");
   };
 
   return (
@@ -33,7 +37,7 @@ const Sidebar = () => {
       <div className="flex items-center shadow-md md:h-full md:flex-col">
         <img className="m-3 h-[28px] w-[157px]" src={img} alt="" />
         <div className="ml-auto md:hidden">
-          <LinesIcon color={defaultColor} onClick={handleMobileMenuToggle} />
+          <LinesIcon color={defaultColor} onClick={handleMobileMenu} />
         </div>
         <div className="hidden w-full text-gray-600 md:mt-10 md:block md:self-start">
           <div className="ml-9 uppercase">Main Menu</div>
@@ -92,6 +96,12 @@ const Sidebar = () => {
         </div>
       </div>
       {/* Mobile menu logic can be added here */}
+
+      <MobileView
+        open={openMobileMenu}
+        onClose={() => setOpenMobileMenu(false)}
+        anchorEl={anchorEl}
+      />
     </div>
   );
 };
