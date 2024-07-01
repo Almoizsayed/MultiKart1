@@ -16,9 +16,10 @@ const Dashboard = () => {
   ).length;
 
   return (
-    <div className="md:ml=5">
+    <div className="md:ml-5">
       <div className="ml-4 mt-8 text-2xl font-normal">Dashboard</div>
-      <div className="md:flex">
+      <div className="md:flex flex-wrap justify-center">
+        {/* Total Users */}
         <div className="m-5 flex justify-between rounded-xl border p-5 shadow-lg md:w-64">
           <div className="text-base">Total Users</div>
           <div className="mt-3 text-2xl font-medium">{totalUsers}</div>
@@ -26,6 +27,8 @@ const Dashboard = () => {
             <TotalUsersIcon />
           </div>
         </div>
+
+        {/* Active Users */}
         <div className="m-5 flex justify-between rounded-xl border p-5 shadow-lg md:w-64">
           <div className="text-base">Active Users</div>
           <div className="mt-3 text-2xl font-medium">{activeUsers}</div>
@@ -33,6 +36,8 @@ const Dashboard = () => {
             <ActiveUsersIcon />
           </div>
         </div>
+
+        {/* Inactive Users */}
         <div className="m-5 flex justify-between rounded-xl border p-5 shadow-lg md:w-64">
           <div className="text-base">Inactive Users</div>
           <div className="mt-3 text-2xl font-medium">{inactiveUsers}</div>
@@ -40,9 +45,13 @@ const Dashboard = () => {
             <InactiveUsersIcon />
           </div>
         </div>
-      </div>
-      <div className="ml-9 mt-14 hidden h-[400px] w-[551px] md:block">
-        <TotalUsersChart />
+
+        {/* Total Users Chart */}
+        <div className="m-5 w-full md:flex-1 md:mx-10 mt-10">
+          <div className="p-5 w-full h-80 md:h-96 md:w-[551px] rounded-xl border shadow-lg bg-white">
+            <TotalUsersChart />
+          </div>
+        </div>
       </div>
     </div>
   );
