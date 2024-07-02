@@ -1,12 +1,12 @@
 import React from "react";
 
-export const UsersIcon = () => {
+export const UsersIcon = ({ color = "currentColor" }) => {
   return (
     <svg
       width="17"
       height="16"
       viewBox="0 0 17 16"
-      fill="none"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

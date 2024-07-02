@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SortByIcon = ({ className }) => {
+const SortByIcon = ({ className }) => {
   return (
     <svg
       width="20"
@@ -17,3 +17,5 @@ export const SortByIcon = ({ className }) => {
     </svg>
   );
 };
+
+export { SortByIcon };
