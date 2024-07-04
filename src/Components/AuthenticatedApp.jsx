@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
-// import Header from "./Header";
+
 import NavBar from "./NavBar";
 
 import UserList from "./UserList";

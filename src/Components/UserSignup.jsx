@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { supabase } from "../utils/supabaseClient";
 import { MainpageHeader } from "./MainpageHeader";
 import { SignupImage } from "../assets/images/SignupImage";
+
 export const UserSignup = () => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -11,30 +12,36 @@ export const UserSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const handleSignUp = async (e) => {
-    e.preventDefault;
-    if (password != confirmPassword) {
-      toast.error("Password doesnt Match");
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
       return;
     }
-    const { data, error } = await supabase.auth.SignUp({
-      email,
-      password,
-      option: {
-        data: { first_name: firstName, last_name: lastName },
-      },
-    });
-    if (error) {
-      if (error.message.includes("Email rate Exceeded")) {
-        toast.error("Too Many SignUp attemps, Please Try again Later");
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { first_name: firstName, last_name: lastName },
+        },
+      });
+      if (error) {
+        if (error.message.includes("Email rate exceeded")) {
+          toast.error("Too many signup attempts, please try again later");
+        } else {
+          toast.error(error.message);
+        }
       } else {
-        toast.error(error.message);
+        toast.success("Signup successful, verify your email to login");
+        setTimeout(() => {
+          navigate("/sign-in");
+        }, 2000);
       }
-    } else {
-      toast.success("SignUp Successfull,Verify Your Mail for Login");
-      setTimeout(() => {
-        navigate("/sign-in");
-      }, 2000);
+    } catch (error) {
+      console.error("Signup error:", error);
+      toast.error("An error occurred during signup");
     }
   };
 
